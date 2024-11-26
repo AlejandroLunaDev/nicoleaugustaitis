@@ -1,8 +1,12 @@
+import About from "@/components/about/About";
+import Hero from "@/components/hero/Hero";
+
 export default function Home() {
   return (
-    <section>
-      <h1 className="text-[40px] text-center text-primary font-parisienne">Nicole</h1>
-      <p className="text-[18px] text-secondary font-montserrat">hola todo bien</p>
+    <section
+    className="pt-16">
+      <Hero />
+      <About />
     </section>
   );
 }
