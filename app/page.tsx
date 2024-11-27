@@ -1,4 +1,5 @@
 import About from "@/components/about/About";
+import Faqs from "@/components/faqs/Faqs";
 import Hero from "@/components/hero/Hero";
 import InfoTeraphy from "@/components/infoTeraphy/InfoTeraphy";
 import InstagramFeed from "@/components/Instagram/InstagramFeed";
@@ -13,6 +14,7 @@ export default function Home() {
       <Reviews />
       <InstagramFeed />
       <InfoTeraphy />
+      <Faqs />
     </section>
   );
 }
