@@ -76,7 +76,7 @@ export default function Hero() {
           viewport={{ amount: 0.2 }}
           className='flex flex-col lg:flex-row gap-2 lg:justify-center'
         >
-          <a href='https://wa.me/5511948642252' className='hover:underline'>
+          <a href='https://wa.me/5511948642252'target='_blank' className='hover:underline'>
             <Button
               variant='default'
               size='default'
