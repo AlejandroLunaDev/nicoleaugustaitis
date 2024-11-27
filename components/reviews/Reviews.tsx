@@ -39,9 +39,6 @@ const reviews: Review[] = [
   }
 ];
 
-
-
-
 export default function ReviewsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -61,11 +58,17 @@ export default function ReviewsCarousel() {
   };
 
   return (
-    <div className='flex flex-col items-center gap-4 p-4'>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: false, amount: 0.2 }}
+      className='flex flex-col items-center gap-4 p-4'
+    >
       <header className='text-center'>
         <h2 className='text-3xl font-semibold text-primary'>Depoimentos</h2>
       </header>
-      <Card className='w-full max-w-md p-2 text-center overflow-hidden'>
+      <Card className='w-full  p-2 text-center overflow-hidden lg:h-[400px]'>
         <div className='flex flex-col items-center justify-between'>
           <div className='mt-4'>
             {renderStars(reviews[currentIndex].rating)}
@@ -74,30 +77,30 @@ export default function ReviewsCarousel() {
             Avaliaçao 5.0 dos meus pacientes
           </span>
 
-            <div className='flex items-center overflow-hidden mt-4'>
-              <Button onClick={handlePrev} variant='ghost'>
-                <FaChevronLeft size={24} />
-              </Button>
-              
-          <motion.div
-            key={currentIndex}
-            initial={{ x: direction === 1 ? 300 : -300, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: direction === 1 ? -300 : 300, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-            className='flex flex-col items-center w-full mx-4 max-h-[150px] overflow-y-scroll'
-          >
-              <p className='mt-2 text-left text-xs lg:text-md text-primary'>
+          <div className='flex items-center overflow-hidden mt-4'>
+            <Button onClick={handlePrev} variant='ghost'>
+              <FaChevronLeft size={24} />
+            </Button>
+
+            <motion.div
+              key={currentIndex}
+              initial={{ x: direction === 1 ? 300 : -300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: direction === 1 ? -300 : 300, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+            className='flex flex-col items-center w-full mx-4 max-h-[150px] lg:h-[400px]  overflow-y-scroll lg:overflow-y-auto'
+            >
+              <p className='mt-2 text-left text-xs lg:text-xl text-primary'>
                 {reviews[currentIndex].text}
               </p>
-              </motion.div>
-              <Button onClick={handleNext} variant='ghost'>
-                <FaChevronRight size={24} />
-              </Button>
-            </div>
-    
+            </motion.div>
+            
+            <Button onClick={handleNext} variant='ghost'>
+              <FaChevronRight size={24} />
+            </Button>
+          </div>
         </div>
       </Card>
-    </div>
+    </motion.div>
   );
 }
