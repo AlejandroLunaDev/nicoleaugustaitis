@@ -1,20 +1,25 @@
-import About from "@/components/about/About";
-import Faqs from "@/components/faqs/Faqs";
-import Hero from "@/components/hero/Hero";
-import InfoTeraphy from "@/components/infoTeraphy/InfoTeraphy";
-import InstagramFeed from "@/components/Instagram/InstagramFeed";
-import Reviews from "@/components/reviews/Reviews";
+// pages/Home.tsx
+
+import {
+  Hero,
+  About,
+  Reviews,
+  InstagramFeed,
+  InfoTeraphy,
+  Faqs,
+  Contact
+} from '@/features';
 
 export default function Home() {
   return (
-    <section
-    className="pt-16">
+    <section className='pt-16'>
       <Hero />
       <About />
       <Reviews />
       <InstagramFeed />
       <InfoTeraphy />
       <Faqs />
+      <Contact />
     </section>
   );
 }
