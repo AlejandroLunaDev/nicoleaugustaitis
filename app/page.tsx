@@ -7,7 +7,8 @@ import {
   InstagramFeed,
   InfoTeraphy,
   Faqs,
-  Contact
+  Contact,
+  Footer
 } from '@/features';
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
       <InfoTeraphy />
       <Faqs />
       <Contact />
+      <Footer />
     </section>
   );
 }

@@ -7,3 +7,4 @@ export { default as Contact } from './contact/Contact';
 export { default as Faqs } from './faqs/Faqs';
 export { default as InfoTeraphy } from './infoteraphy/InfoTeraphy';
 export { default as Reviews } from './reviews/Reviews';
+export { default as Footer } from './footer/Footer';
