@@ -3,6 +3,7 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/shared/components/ui/carousel";
 import { reviews } from "./reviewsData";
 import { renderStars } from "./components/RenderStars";
+import Link from "next/link";
 
 export default function ReviewsCarousel() {
   return (
@@ -19,6 +20,12 @@ export default function ReviewsCarousel() {
               <p className="font-semibold p-2">Avaliações 5.0 dos meus pacientes</p>
 
               {/* Condicional para truncar textos que superen 400 caracteres */}
+              <Link
+                href='https://www.google.com/search?q=nicole+augustaitis&rlz=1C1GCEA_enBR1087BR1087&oq=nico&gs_lcrp=EgZjaHJvbWUqCAgAEEUYJxg7MggIABBFGCcYOzIGCAEQRRg5MhIIAhAuGEMYxwEY0QMYgAQYigUyDAgDEC4YFBiHAhiABDIMCAQQLhgUGIcCGIAEMg0IBRAuGMcBGNEDGIAEMgcIBhAAGIAEMg0IBxAuGMcBGNEDGIAEMgcICBAAGIAEMgcICRAAGIAE0gEJMTc5NGowajE1qAIIsAIB&sourceid=chrome&ie=UTF-8#lrd=0xb30feaf6baa5325:0x9bfe145cd6ad7a33,1,,,,'
+                target="_blank"
+                rel="noopener noreferrer"
+                
+              >
               <p
                 className={`
                   mt-2 text-xs lg:text-xl px-12 text-primary 
@@ -29,6 +36,7 @@ export default function ReviewsCarousel() {
               >
                 {review.text}
               </p>
+              </Link>
             </CarouselItem>
           ))}
         </CarouselContent>
