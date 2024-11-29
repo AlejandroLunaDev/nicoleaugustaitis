@@ -35,7 +35,7 @@ export default function InstagramFeed() {
 
     fetchInstagramFeed();
   }, []);
-
+console.log(posts)
   return (
     <div>
       <section id="instagram" className='px-2'>
