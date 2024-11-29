@@ -31,7 +31,7 @@ export default function Navbar() {
         <DropdownMenuTrigger className="md:hidden">
           <Menu className="w-6 h-6" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-primary text-white">
+        <DropdownMenuContent className="bg-white ">
           {navLinks.map((link) => (
             <DropdownMenuItem asChild key={link.href}>
               <Link href={link.href} className={getActiveClass(link.href.slice(1))}>
