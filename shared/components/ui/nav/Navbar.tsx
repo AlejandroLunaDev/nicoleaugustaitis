@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between px-3 py-3 lg:p-5 text-primary fixed top-0 z-50 bg-white w-full">
-      <div className="text-2xl lg:text-3xl">
+      <div className="text-3xl font-semibold">
         <Link href="/" className="font-parisienne capitalize color-primary">
           nicole augustaitis
         </Link>

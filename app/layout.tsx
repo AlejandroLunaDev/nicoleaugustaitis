@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     icon: '/svg/ni.svg',
   },
   openGraph: {
-    title: 'Nicole Augustaitis | Psicóloga Online Especialista em TCC',
+    title: 'Nicole Augustaitis | Psicóloga Terapia Cognitivo-Comportamental Online',
     description:
       'Buscando terapia online? Nicole Augustaitis é psicóloga especializada em Terapia Cognitivo-Comportamental, oferecendo suporte profissional e acolhedor para melhorar sua saúde mental.',
     url: 'https://nicoleaugustaitis.com',
