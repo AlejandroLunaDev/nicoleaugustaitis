@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import FormationLi from '@/shared/components/ui/FormationLi';
 import { sessions } from './infoData';
 
-export default function InfoTeraphy() {
+export default function InfoTerapy() {
   return (
     <section id='atendimento' className='p-3'>
       <motion.article

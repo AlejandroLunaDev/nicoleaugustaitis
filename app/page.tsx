@@ -5,7 +5,7 @@ import {
   About,
   Reviews,
   InstagramFeed,
-  InfoTeraphy,
+  InfoTerapy,
   Faqs,
   Contact,
   Footer
@@ -18,7 +18,7 @@ export default function Home() {
       <About />
       <Reviews />
       <InstagramFeed />
-      <InfoTeraphy />
+      <InfoTerapy />
       <Faqs />
       <Contact />
       <Footer />
