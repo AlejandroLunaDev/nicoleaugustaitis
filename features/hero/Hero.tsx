@@ -13,9 +13,9 @@ export default function Hero() {
         }}
       >
         <div className='z-10 text-center flex flex-col gap-3'>
-          <h3 className='text-2xl capitalize animate-fade-in-delay'>
+          <h1 className='text-3xl capitalize animate-fade-in-delay'>
             terapias cognitivo comportamentais
-          </h3>
+          </h1>
           <p className='animate-fade-in-delay'>CRP 06/91969</p>
         </div>
         <div className='absolute bottom-0 inset-x-0 bg-gradient-to-b from-transparent to-white h-[30%] rounded-md' />

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Montserrat, Playfair_Display, Parisienne } from 'next/font/google';
+import { Montserrat, Parisienne, Lato } from 'next/font/google';
 import { Navbar } from '@/shared/components/ui/nav';
 
 const montserrat = Montserrat({
@@ -8,15 +8,17 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 });
 
-const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair-display',
-});
 
 const parisienne = Parisienne({
   subsets: ['latin'],
   variable: '--font-parisienne',
   weight: '400',
+});
+
+const lato = Lato({
+  subsets: ['latin'],
+  variable: '--font-lato',
+  weight: '400', 
 });
 
 export const metadata: Metadata = {
@@ -77,7 +79,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${montserrat.variable} ${playfairDisplay.variable} ${parisienne.variable}`}
+      className={`${montserrat.variable} ${lato.variable}  ${parisienne.variable}`}
     >
       <body>
         <Navbar />

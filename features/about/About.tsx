@@ -13,7 +13,7 @@ export default function About() {
       className='px-5'
     >
       <div className='text-3xl lg:text-5xl text-center py-5'>
-        <Link href='/' className='font-parisienne capitalize text-primary'>
+        <Link href='/' className='font-parisienne font-semibold capitalize text-primary'>
           nicole augustaitis
         </Link>
       </div>
@@ -29,7 +29,7 @@ export default function About() {
         <MotionWrapper
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ amount: 0.2 }}
           className='flex flex-col lg:flex-row gap-8 mt-8'
         >

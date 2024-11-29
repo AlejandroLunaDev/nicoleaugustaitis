@@ -31,7 +31,7 @@ export default function InfoTerapy() {
         </motion.header>
         <div className='w-full'>
           <div className='bg-white rounded-md p-2 md:p-4 text-center text-primary'>
-            <h1 className='text-2xl md:text-4xl'>Atendimento</h1>
+            <h1 className='text-2xl font-semibold md:text-4xl'>Atendimento</h1>
           </div>
           <div className='flex flex-col'>
             <div className='text-white flex flex-col gap-2 items-center mt-5'>
