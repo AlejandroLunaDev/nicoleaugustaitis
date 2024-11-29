@@ -28,7 +28,7 @@ export async function GET() {
     }
 
     // Asegúrate de mapear los datos a la interfaz InstagramPost
-    const posts: InstagramPost[] = data.data.map((post: any) => ({
+    const posts: InstagramPost[] = data.data.map((post: InstagramPost) => ({
       id: post.id,
       caption: post.caption,
       media_type: post.media_type,
@@ -40,6 +40,7 @@ export async function GET() {
 
     return NextResponse.json({ posts });
   } catch (error) {
+    console.error('Error fetching Instagram data:', error);
     return NextResponse.json({ error: 'Failed to fetch Instagram data' }, { status: 500 });
   }
 }
