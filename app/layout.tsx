@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Montserrat, Playfair_Display, Parisienne } from 'next/font/google';
-import Navbar from '@/shared/components/nav/Navbar';
+import { Navbar } from '@/shared/components/ui/nav';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -20,7 +20,7 @@ const parisienne = Parisienne({
 });
 
 export const metadata: Metadata = {
-  title: 'Nicole Augustaitis | Psicóloga Especializada em Terapia Cognitivo-Comportamental Online',
+  title: 'Nicole Augustaitis | Psicóloga Terapia Cognitivo-Comportamental Online',
   description:
     'Nicole Augustaitis é psicóloga especializada em Terapia Cognitivo-Comportamental (TCC). Atendimentos psicológicos online para ajudar você a lidar com ansiedade, depressão, autoestima e mais.',
   icons: {
