@@ -1,7 +1,7 @@
 export default function AboutText() {
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="text-4xl lg:text-6xl">Sobre mim</h2>
+      <h3 className="text-4xl lg:text-6xl">Sobre mim</h3>
       <p className="text-lg lg:text-xl leading-relaxed">
         Olá, sou Nicole, psicóloga clínica especializada em Terapia
         Cognitivo-Comportamental. Após 13 anos em Recursos Humanos, decidi

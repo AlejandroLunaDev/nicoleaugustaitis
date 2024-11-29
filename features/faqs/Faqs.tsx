@@ -17,7 +17,7 @@ export default function Faqs() {
   return (
     <section id='faq' className='p-5 bg-white rounded-md shadow-md'>
       <header className='text-center mb-6'>
-        <h2 className='text-3xl font-semibold text-accent'>Faq</h2>
+        <h4 className='text-3xl font-semibold'>Faq</h4>
         <p className='text-lg'>Principais dúvidas que recebo</p>
       </header>
       <Accordion type='single' collapsible className='px-8 space-y-4'>

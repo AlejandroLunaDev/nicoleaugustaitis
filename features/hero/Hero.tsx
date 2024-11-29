@@ -1,4 +1,4 @@
-'use client';
+
 import { Button } from '@/shared/components/ui/button';
 import Link from 'next/link';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -23,9 +23,9 @@ export default function Hero() {
 
       <div className='text-center lg:text-left lg:justify-center py-4 flex flex-col gap-2 lg:gap-10 lg:w-2/3 lg:px-10 animate-slide-up'>
         <div className='lg:flex flex-col gap-2 lg:gap-10 animate-slide-up'>
-          <h2 className='text-accent font-semibold lg:text-5xl'>
+          <h4 className='font-semibold lg:text-5xl'>
             Cuidando da sua saúde mental com empatia e ciência
-          </h2>
+          </h4>
           <p className='text-sm lg:text-lg'>
             Sou <span className='font-bold'>psicóloga clínica</span> com mais de
             10 anos de experiência. Especializada em Terapia

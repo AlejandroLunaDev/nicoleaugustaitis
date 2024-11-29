@@ -43,9 +43,9 @@ export default function About() {
               />
             </div>
             <div className='p-5'>
-              <h2 className='text-lg lg:text-3xl mb-4 text-accent font-semibold'>
+              <h4 className='text-lg lg:text-3xl mb-4 font-semibold'>
                 Minha formação
-              </h2>
+              </h4>
               <FormationList />
               <a href='https://wa.me/5511948642252' className='hover:underline'>
                 <Button

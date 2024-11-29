@@ -16,6 +16,14 @@
   h3,
   h4 {
     font-family: var(--font-playfair-display);
+  
+  }
+
+  h2 {
+    color: #C1A482;
+  }
+  h4{ 
+    color:#976934
   }
 
   p,
