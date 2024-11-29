@@ -11,6 +11,7 @@ interface InstagramPost {
   media_type: string;
   media_url: string;
   permalink: string;
+  thumbnail_url: string;
 }
 
 export default function InstagramFeed() {
@@ -35,7 +36,6 @@ export default function InstagramFeed() {
 
     fetchInstagramFeed();
   }, []);
-console.log(posts)
   return (
     <div>
       <section id="instagram" className='px-2'>
@@ -62,7 +62,7 @@ console.log(posts)
                 {(post.media_type === 'IMAGE' ||
                   (post.media_type === 'CAROUSEL_ALBUM' && post.media_url)) && (
                   <Image
-                    src={post.media_url}
+                    src={post.thumbnail_url || post.media_url}
                     alt={post.caption || 'Instagram post'}
                     fill
                     className="object-cover"
