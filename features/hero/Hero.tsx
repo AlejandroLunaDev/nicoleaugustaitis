@@ -9,7 +9,7 @@ export default function Hero() {
       <div
         className='relative flex flex-col items-center justify-end h-[400px] lg:h-[650px] lg:w-1/3 rounded-md bg-cover bg-center animate-fade-in'
         style={{
-          backgroundImage: 'url(/images/NicoleLanding.jpg)'
+          backgroundImage: 'url(/images/niheroup.png)'
         }}
       >
         <div className='z-10 text-center flex flex-col gap-3'>

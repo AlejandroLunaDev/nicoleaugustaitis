@@ -33,13 +33,14 @@ export default function About() {
           viewport={{ amount: 0.2 }}
           className='flex flex-col lg:flex-row gap-8 mt-8'
         >
-          <div className='w-full lg:h-[600px]  flex h-auto flex-col lg:flex-row gap-4 bg-white shadow-lg rounded-lg text-black'>
+          <div className='w-full lg:h-[600px] flex h-auto flex-col lg:flex-row gap-4 bg-white shadow-lg rounded-lg text-black'>
             <div className='relative w-full h-80 lg:h-full md:h-[500px]'>
               <Image
-                src='/images/librofinalCalidad.jpeg'
+                src='/images/nilivroup.png'
                 alt='Nicole Augustaitis'
                 className='rounded-md object-cover'
                 fill
+                style={{ objectPosition: 'top center' }}
               />
             </div>
             <div className='p-5'>

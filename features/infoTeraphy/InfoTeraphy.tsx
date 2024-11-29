@@ -22,7 +22,7 @@ export default function InfoTeraphy() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           <Image
-            src='/images/horizontal2.jpg'
+            src='/images/nisessoesup.png'
             width={500}
             height={500}
             alt=''
