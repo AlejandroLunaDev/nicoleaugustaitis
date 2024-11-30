@@ -11,7 +11,7 @@ interface InstagramPost {
 }
 
 export async function GET() {
-  const { ACCESS_TOKEN } = process.env; // Asegúrate de tener esto en tu archivo .env.local
+  const { ACCESS_TOKEN } = process.env; 
   if (!ACCESS_TOKEN) {
     return NextResponse.json({ error: 'Access token is missing' }, { status: 400 });
   }
@@ -27,7 +27,7 @@ export async function GET() {
       return NextResponse.json({ error: data.error.message }, { status: 400 });
     }
 
-    // Asegúrate de mapear los datos a la interfaz InstagramPost
+
     const posts: InstagramPost[] = data.data.map((post: InstagramPost) => ({
       id: post.id,
       caption: post.caption,

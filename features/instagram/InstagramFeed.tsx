@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
-import { useEffect, useState } from 'react';
 import { FaInstagram } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -14,31 +11,34 @@ interface InstagramPost {
   thumbnail_url: string;
 }
 
-export default function InstagramFeed() {
-  const [posts, setPosts] = useState<InstagramPost[]>([]);
-  const [error, setError] = useState<string | null>(null);
+async function fetchInstagramFeed(): Promise<InstagramPost[]> {
+  const response = await fetch(`${process.env.API_URL}/api/instagram`, {
+    cache: 'no-store', // Para datos dinámicos
+  });
+  const data = await response.json();
 
-  useEffect(() => {
-    const fetchInstagramFeed = async () => {
-      try {
-        const response = await fetch('/api/instagram');
-        const data = await response.json();
 
-        if (data.error) {
-          setError(data.error);
-        } else {
-          setPosts(data.posts || []);
-        }
-      }catch (err: any) {
-        setError(`Failed to fetch Instagram feed: ${err.message}`);
-      }
-    };
+  if (data.error) {
+    throw new Error(data.error);
+  }
 
-    fetchInstagramFeed();
-  }, []);
+  return data.posts || [];
+}
+
+export default async function InstagramFeed() {
+  let posts: InstagramPost[] = [];
+  let error: string | null = null;
+
+  try {
+    posts = await fetchInstagramFeed();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    error = `Failed to fetch Instagram feed: ${err.message}`;
+  }
+
   return (
     <div>
-      <section id="instagram" className='px-2'>
+      <section id="instagram" className="px-2">
         <Link
           target="_blank"
           href="https://www.instagram.com/psi.nicoleaugustaitis/"
@@ -50,7 +50,7 @@ export default function InstagramFeed() {
 
         {error && <p>{error}</p>}
 
-        <div className="grid grid-cols-3 lg:grid-cols-3 gap-4 ">
+        <div className="grid grid-cols-3 lg:grid-cols-3 gap-4">
           {Array.isArray(posts) &&
             posts.slice(0, 9).map((post) => (
               <Link
@@ -66,9 +66,6 @@ export default function InstagramFeed() {
                     alt={post.caption || 'Instagram post'}
                     fill
                     className="object-cover"
-                    onError={() =>
-                      console.error('Error loading image:', post.media_url)
-                    }
                   />
                 )}
                 {post.media_type === 'VIDEO' && (
@@ -77,9 +74,6 @@ export default function InstagramFeed() {
                     muted
                     loop
                     className="absolute inset-0 w-full h-full object-cover video-preview"
-                    onError={() =>
-                      console.error('Error loading video:', post.media_url)
-                    }
                   />
                 )}
               </Link>
