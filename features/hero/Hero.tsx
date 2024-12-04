@@ -14,7 +14,7 @@ export default function Hero() {
       >
         <div className='z-10 text-center flex flex-col gap-3'>
           <h1 className='text-3xl capitalize animate-fade-in-delay'>
-            terapias cognitivo comportamentais
+            terapia cognitivo comportamental
           </h1>
           <p className='animate-fade-in-delay'>CRP 06/91969</p>
         </div>
@@ -24,15 +24,16 @@ export default function Hero() {
       <div className='text-center lg:text-left lg:justify-center py-4 flex flex-col gap-2 lg:gap-10 lg:w-2/3 lg:px-10 animate-slide-up'>
         <div className='lg:flex flex-col gap-2 lg:gap-10 animate-slide-up'>
           <h4 className='font-semibold lg:text-5xl'>
-            Cuidando da sua saúde mental com empatia e ciência
+          Transforme seus pensamentos para transformar sua vida.
           </h4>
+          <div className='flex flex-col gap-2'>
           <p className='text-sm lg:text-lg'>
-            Sou <span className='font-bold'>psicóloga clínica</span> com mais de
-            10 anos de experiência. Especializada em Terapia
-            Cognitivo-Comportamental, ofereço atendimento{' '}
-            <span className='font-bold'>online</span> com foco no seu bem-estar
-            emocional.
+            Sou <span className='font-bold'>Psicóloga clínica</span> há 10 anos e minha prática é fundamentada na Terapia Cognitivo-Comportamental. 
           </p>
+          <p className='text-sm lg:text-lg'>
+          Realizo atendimento <span className='font-bold'>online</span> com foco no seu bem-estar emocional e na construção de uma vida com mais clareza e propósito.
+          </p>
+          </div>
         </div>
 
         <div className='flex flex-col lg:flex-row gap-2 lg:justify-center animate-slide-up'>

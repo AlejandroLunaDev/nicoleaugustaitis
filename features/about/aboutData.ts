@@ -3,6 +3,6 @@ export const formationData = [
     { id: 2, name: 'Formação em Terapia Cognitivo-Comportamental (CETCC/SP)' },
     { id: 3, name: 'Formação em Terapia Cognitivo-Comportamental (Grupo PBE)' },
     { id: 4, name: 'Educação Continuada na Prática Clínica' },
-    { id: 5, name: 'Pós Graduanda em PBE' },
+    { id: 5, name: 'Pós Graduanda em PBE(Psicologia Baseada em Evidências): Terapias Cognitivo-Comportamentais' },
   ];
   

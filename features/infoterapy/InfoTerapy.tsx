@@ -8,7 +8,7 @@ import { sessions } from './infoData';
 
 export default function InfoTerapy() {
   return (
-    <section id='atendimento' className='p-3'>
+    <section id='sessoes' className='p-3'>
       <motion.article
         className='bg-primary w-full rounded-md p-2 md:p-4 gap-4 flex flex-col lg:flex-row'
         initial={{ opacity: 0, y: 50 }}

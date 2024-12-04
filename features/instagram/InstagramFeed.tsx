@@ -13,7 +13,6 @@ interface InstagramPost {
 
 async function fetchInstagramFeed(): Promise<InstagramPost[]> {
   const response = await fetch(`${process.env.API_URL}/api/instagram`, {
-    cache: 'no-store', // Para datos dinámicos
   });
   const data = await response.json();
 
