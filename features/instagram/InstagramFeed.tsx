@@ -35,7 +35,6 @@ export default async function InstagramFeed() {
     error = `Failed to fetch Instagram feed: ${err.message}`;
   }
 
-  console.log('posts', posts);
   return (
     <div>
       <section id="instagram" className="px-2">
