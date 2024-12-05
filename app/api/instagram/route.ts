@@ -27,7 +27,6 @@ export async function GET() {
       return NextResponse.json({ error: data.error.message }, { status: 400 });
     }
 
-
     const posts: InstagramPost[] = data.data.map((post: InstagramPost) => ({
       id: post.id,
       caption: post.caption,
@@ -38,7 +37,12 @@ export async function GET() {
       timestamp: post.timestamp,
     }));
 
-    return NextResponse.json({ posts });
+    const responseToClient = NextResponse.json({ posts });
+
+    // Asegúrate de que las respuestas no se guarden en caché
+    responseToClient.headers.set('Cache-Control', 'no-store, max-age=0');
+
+    return responseToClient;
   } catch (error) {
     console.error('Error fetching Instagram data:', error);
     return NextResponse.json({ error: 'Failed to fetch Instagram data' }, { status: 500 });
