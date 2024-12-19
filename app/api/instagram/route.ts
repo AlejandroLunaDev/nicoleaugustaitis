@@ -1,4 +1,7 @@
 import { NextResponse } from 'next/server';
+import { headers } from 'next/headers';
+
+export const revalidate = 3600;
 
 interface InstagramPost {
   id: string;
@@ -11,14 +14,24 @@ interface InstagramPost {
 }
 
 export async function GET() {
-  const { ACCESS_TOKEN } = process.env; 
+  const { ACCESS_TOKEN } = process.env;
+  const headersList = headers();
+  const userAgent = headersList.get('user-agent') || '';
+  const isMobile = /Mobile|Android|iPhone/i.test(userAgent);
+
   if (!ACCESS_TOKEN) {
     return NextResponse.json({ error: 'Access token is missing' }, { status: 400 });
   }
 
   try {
+    // Request smaller image sizes for mobile
+    const fields = isMobile 
+      ? 'id,caption,media_type,thumbnail_url,permalink,timestamp'
+      : 'id,caption,media_type,media_url,thumbnail_url,permalink,timestamp';
+
     const response = await fetch(
-      `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&access_token=${ACCESS_TOKEN}`
+      `https://graph.instagram.com/me/media?fields=${fields}&access_token=${ACCESS_TOKEN}`,
+      { next: { revalidate: 3600 } }
     );
     
     const data = await response.json();
@@ -31,18 +44,13 @@ export async function GET() {
       id: post.id,
       caption: post.caption,
       media_type: post.media_type,
-      media_url: post.media_url,
-      thumbnail_url: post.thumbnail_url,
+      media_url: isMobile ? (post.thumbnail_url || post.media_url) : post.media_url,
+      thumbnail_url: post.thumbnail_url || post.media_url,
       permalink: post.permalink,
       timestamp: post.timestamp,
     }));
 
-    const responseToClient = NextResponse.json({ posts });
-
-    // Asegúrate de que las respuestas no se guarden en caché
-    responseToClient.headers.set('Cache-Control', 'no-store, max-age=0');
-
-    return responseToClient;
+    return NextResponse.json({ posts });
   } catch (error) {
     console.error('Error fetching Instagram data:', error);
     return NextResponse.json({ error: 'Failed to fetch Instagram data' }, { status: 500 });

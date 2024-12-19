@@ -69,7 +69,7 @@ export default async function InstagramFeed() {
                 )}
                 {post.media_type === 'VIDEO' && (
                   <video
-                    src={post.media_url}
+                    src={post.media_url|| post.thumbnail_url}
                     muted
                     loop
                     className="absolute inset-0 w-full h-full object-cover video-preview"
