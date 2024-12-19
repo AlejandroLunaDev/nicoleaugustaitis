@@ -10,19 +10,6 @@ const nextConfig = {
       'video.cdninstagram.com',
       'scontent.xx.fbcdn.net'
     ],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.fbcdn.net',
-        pathname: '**',
-      },
-      {
-        protocol: 'https', 
-        hostname: '**.cdninstagram.com',
-        pathname: '**',
-      }
-    ],
-    unoptimized: true // Add this to handle expiring URLs
   },
 };
 
