@@ -11,28 +11,60 @@ interface InstagramPost {
   thumbnail_url: string;
 }
 
-async function fetchInstagramFeed(): Promise<InstagramPost[]> {
+async function fetchInstagramFeed(): Promise<{ posts: InstagramPost[]; lastFetched: string }> {
   const response = await fetch(`${process.env.API_URL}/api/instagram`, {
+    next: {
+      revalidate: 900, // Revalidar cada 15 minutos
+    },
   });
-  const data = await response.json();
 
+  const data = await response.json();
 
   if (data.error) {
     throw new Error(data.error);
   }
 
-  return data.posts || [];
+  return {
+    posts: data.posts || [],
+    lastFetched: data.lastFetched,
+  };
+}
+
+// Verificar si una URL de recurso multimedia es válida
+async function validateMediaUrl(url: string): Promise<boolean> {
+  try {
+    const response = await fetch(url, { method: 'HEAD' });
+    return response.ok;
+  } catch {
+    return false;
+  }
 }
 
 export default async function InstagramFeed() {
   let posts: InstagramPost[] = [];
   let error: string | null = null;
+  let lastFetched: string | null = null;
 
   try {
-    posts = await fetchInstagramFeed();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    error = `Failed to fetch Instagram feed: ${err.message}`;
+    const data = await fetchInstagramFeed();
+
+    // Validar URLs antes de renderizar
+    posts = await Promise.all(
+      data.posts.map(async (post) => {
+        const isValid = await validateMediaUrl(post.media_url);
+        return isValid ? post : null;
+      })
+    ).then((results) => results.filter(Boolean) as InstagramPost[]);
+
+    lastFetched = data.lastFetched;
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      error = `Failed to fetch Instagram feed: ${err.message}`;
+      console.error('Instagram feed error:', err);
+    } else {
+      error = 'An unknown error occurred';
+      console.error('Instagram feed error:', err);
+    }
   }
 
   return (
@@ -47,37 +79,47 @@ export default async function InstagramFeed() {
           <p className="text-xl md:text-3xl">psi.nicoleaugustaitis</p>
         </Link>
 
-        {error && <p>{error}</p>}
+        {error && <div className="text-red-500 mb-4">{error}</div>}
 
         <div className="grid grid-cols-3 lg:grid-cols-3 gap-4">
           {Array.isArray(posts) &&
-            posts.slice(0, 9).map((post) => (
+            posts.slice(0, 9).map((post, index) => (
               <Link
                 key={post.id}
                 href={post.permalink}
                 target="_blank"
-                className="relative w-full h-0 pb-[100%] overflow-hidden bg-gray-100"
+                className="relative w-full h-0 pb-[100%] overflow-hidden bg-gray-100 group"
               >
                 {(post.media_type === 'IMAGE' ||
-                  (post.media_type === 'CAROUSEL_ALBUM' && post.media_url)) && (
+                  post.media_type === 'CAROUSEL_ALBUM') && (
                   <Image
-                    src={post.thumbnail_url || post.media_url}
+                    src={post.media_url || post.thumbnail_url}
                     alt={post.caption || 'Instagram post'}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-opacity group-hover:opacity-90"
+                    priority={index < 3}
+                    sizes="(max-width: 768px) 33vw, 20vw"
                   />
                 )}
-                {post.media_type === 'VIDEO' && (
-                  <video
-                    src={post.media_url|| post.thumbnail_url}
-                    muted
-                    loop
-                    className="absolute inset-0 w-full h-full object-cover video-preview"
+                {post.media_type === 'VIDEO' && post.thumbnail_url && (
+                  <Image
+                    src={post.thumbnail_url}
+                    alt={post.caption || 'Instagram video thumbnail'}
+                    fill
+                    className="object-cover transition-opacity group-hover:opacity-90"
+                    priority={index < 3}
+                    sizes="(max-width: 768px) 33vw, 20vw"
                   />
                 )}
               </Link>
             ))}
         </div>
+
+        {lastFetched && (
+          <div className="text-xs text-gray-500 mt-4 text-right">
+            Última actualización: {new Date(lastFetched).toLocaleTimeString()}
+          </div>
+        )}
       </section>
     </div>
   );

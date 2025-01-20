@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
 
-export const revalidate = 3600;
+// Reduce revalidation time to 15 minutes to prevent URL expiration issues
+export const revalidate = 900;
 
 interface InstagramPost {
   id: string;
@@ -15,44 +15,48 @@ interface InstagramPost {
 
 export async function GET() {
   const { ACCESS_TOKEN } = process.env;
-  const headersList = headers();
-  const userAgent = headersList.get('user-agent') || '';
-  const isMobile = /Mobile|Android|iPhone/i.test(userAgent);
-
+  
   if (!ACCESS_TOKEN) {
     return NextResponse.json({ error: 'Access token is missing' }, { status: 400 });
   }
 
   try {
-    // Request smaller image sizes for mobile
-    const fields = isMobile 
-      ? 'id,caption,media_type,thumbnail_url,permalink,timestamp'
-      : 'id,caption,media_type,media_url,thumbnail_url,permalink,timestamp';
-
+    const fields = 'id,caption,media_type,media_url,thumbnail_url,permalink,timestamp';
+    
     const response = await fetch(
       `https://graph.instagram.com/me/media?fields=${fields}&access_token=${ACCESS_TOKEN}`,
-      { next: { revalidate: 3600 } }
+      { cache: 'no-store' } // Evitar el uso de caché
     );
+
+    if (!response.ok) {
+      throw new Error(`Instagram API responded with status: ${response.status}`);
+    }
     
     const data = await response.json();
 
     if (data.error) {
-      return NextResponse.json({ error: data.error.message }, { status: 400 });
+      throw new Error(data.error.message);
     }
 
-    const posts: InstagramPost[] = data.data.map((post: InstagramPost) => ({
-      id: post.id,
-      caption: post.caption,
-      media_type: post.media_type,
-      media_url: isMobile ? (post.thumbnail_url || post.media_url) : post.media_url,
-      thumbnail_url: post.thumbnail_url || post.media_url,
-      permalink: post.permalink,
-      timestamp: post.timestamp,
-    }));
+    // Filtrar posts con URLs válidas
+    const validPosts = data.data.filter((post: InstagramPost) => post.media_url);
 
-    return NextResponse.json({ posts });
-  } catch (error) {
-    console.error('Error fetching Instagram data:', error);
-    return NextResponse.json({ error: 'Failed to fetch Instagram data' }, { status: 500 });
+    return NextResponse.json({ 
+      posts: validPosts,
+      lastFetched: new Date().toISOString()
+    });
+
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+        console.error('Instagram feed error:', error);
+        return NextResponse.json(
+          { error: 'Failed to fetch Instagram feed', details: error.message },
+          { status: 500 }
+        );
+    }
+    return NextResponse.json(
+      { error: 'Failed to fetch Instagram feed', details: 'Unknown error' },
+      { status: 500 }
+    );
   }
 }
